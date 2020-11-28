@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Stats.TPetAge;
 import Stats.TPetHappiness;
@@ -20,6 +22,7 @@ import Stats.TPetWeight;
 
 public class TPetModel extends Observable{
 	private List<TPetStat> stats;
+	private Timer timer;
 	
 	public TPetModel() {
 		stats = new ArrayList<TPetStat>();
@@ -27,6 +30,13 @@ public class TPetModel extends Observable{
 		stats.add(new TPetHealth());
 		stats.add(new TPetWeight());
 		stats.add(new TPetHappiness());
+
+		timer = new Timer(true);
+		timer.scheduleAtFixedRate(new UpdateTimer(), 0, 1000);
+	}
+	
+	public void cancelTimer() {
+		timer.cancel();
 	}
 	
 	public void update() {
@@ -72,5 +82,15 @@ public class TPetModel extends Observable{
 	
 	public void setWeight(int weight) {
 		findStat(TPetWeight.class).set(weight);
+	}
+	
+	private class UpdateTimer extends TimerTask{
+
+		@Override
+		public void run() {
+			update();
+			System.out.println("Age:" + getAge());
+		}
+	
 	}
 }
