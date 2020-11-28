@@ -9,6 +9,7 @@
 
 public class TPetController {
 	private TPetModel model;
+	public static TPetController _instance;
 	
 	public TPetController() {
 		this(new TPetModel());
@@ -16,5 +17,6 @@ public class TPetController {
 	
 	public TPetController(TPetModel model) {
 		this.model = model;
+		_instance = this;
 	}
 }
