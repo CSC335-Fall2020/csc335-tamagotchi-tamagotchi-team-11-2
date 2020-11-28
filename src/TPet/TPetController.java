@@ -1,5 +1,10 @@
 package TPet;
 
+import java.util.List;
+
+import Stats.TPetHealth;
+import Stats.TPetStat;
+
 /*
  * Team Project
  * Tamagotchi Pet
@@ -19,5 +24,13 @@ public class TPetController {
 	public TPetController(TPetModel model) {
 		this.model = model;
 		_instance = this;
+	}
+	
+	public static TPetController getInstance() {
+		return _instance;
+	}
+	
+	public List<TPetStat> getStats(){
+		return model.getStats();
 	}
 }

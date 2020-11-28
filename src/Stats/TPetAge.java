@@ -9,6 +9,7 @@ public class TPetAge extends TPetStat {
 	
 	@Override
 	public void update() {
+		if(!shouldUpdate()) return;
 		data += 1;
 	}
 	

@@ -19,6 +19,7 @@ public class TPetHealth extends TPetStat {
 	
 	@Override
 	public void update() {
+		if(!shouldUpdate()) return;
 		data = Math.random() < 0.2 ? data : data - 1; //Simple algorithm. Needs improvement
 		
 		if(Math.random() < 0.05) {

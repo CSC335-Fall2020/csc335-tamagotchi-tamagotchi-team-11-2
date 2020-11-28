@@ -25,6 +25,13 @@ public class TPetModel extends Observable{
 	private List<TPetStat> stats;
 	private Timer timer;
 	
+	public static enum StatIndex{
+		TPetAge,
+		TPetHealth,
+		TPetWeight,
+		TPetHappiness
+	}
+	
 	public TPetModel() {
 		stats = new ArrayList<TPetStat>();
 		stats.add(new TPetAge());
@@ -83,6 +90,10 @@ public class TPetModel extends Observable{
 	
 	public void setWeight(int weight) {
 		findStat(TPetWeight.class).set(weight);
+	}
+	
+	public List<TPetStat> getStats(){
+		return stats;
 	}
 	
 	private class UpdateTimer extends TimerTask{
