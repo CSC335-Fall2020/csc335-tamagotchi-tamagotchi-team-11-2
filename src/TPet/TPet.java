@@ -1,4 +1,7 @@
 package TPet;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.application.Application;
 
 /*
@@ -12,6 +15,18 @@ import javafx.application.Application;
 
 public class TPet {
 	public static void main(String[] args) {
-		Application.launch(TPetView.class, args);
+//		Application.launch(TPetView.class, args);
+		TPetModel model = new TPetModel();
+//		model.getHappiness();
+		
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			public void run() {
+				System.out.println("--------------------");
+			}
+		};
+		timer.scheduleAtFixedRate(task, 0, 500);
+		
+
 	}
 }

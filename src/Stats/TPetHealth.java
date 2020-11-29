@@ -1,16 +1,25 @@
 package Stats;
 
+import java.util.List;
+
+
 public class TPetHealth extends TPetStat {
 	private boolean isSick;
+	private int maxHealth = 100;
+	private int health;
 	
 	public TPetHealth() {
 		super();
-		data = 100;
+		health = maxHealth;
 		isSick = false;
 	}
 
 	public int getHealth() {
-		return data;	//In percentage. Lower health means higher risk of sick
+		return health;	//In percentage. Lower health means higher risk of sick
+	}
+	
+	public void set(int health) {
+		this.health = health;
 	}
 	
 	public boolean getIsSick() {
@@ -20,18 +29,23 @@ public class TPetHealth extends TPetStat {
 	@Override
 	public void update() {
 		if(!shouldUpdate()) return;
-		data = Math.random() < 0.2 ? data : data - 1; //Simple algorithm. Needs improvement
+		//hungriness
+		//	if hungriness below 60, health -0.1 per second
 		
-		if(Math.random() < 0.05) {
-			//Try to get sick
-			if(Math.random() * 100 > data || data < 10) {
-				sick();
-			}
-		}
+		//happiness
+		//	if mood is sad,  health -0.1 per second
+		
+		//age
+		//	when age >= 80% of lifeSpan, then the max health drops
+		
 		
 	}
 	
 	private void sick() {
 		isSick = true;
+	}
+	
+	public int get() {
+		return health;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.TimerTask;
 import Stats.TPetAge;
 import Stats.TPetHappiness;
 import Stats.TPetHealth;
+import Stats.TPetHungriness;
 import Stats.TPetStat;
 import Stats.TPetWeight;
 
@@ -29,7 +30,8 @@ public class TPetModel extends Observable{
 		TPetAge,
 		TPetHealth,
 		TPetWeight,
-		TPetHappiness
+		TPetHappiness,
+		TPetHungeriness
 	}
 	
 	public TPetModel() {
@@ -38,9 +40,12 @@ public class TPetModel extends Observable{
 		stats.add(new TPetHealth());
 		stats.add(new TPetWeight());
 		stats.add(new TPetHappiness());
+		stats.add(new TPetHungriness());
 
 		timer = new Timer(true);
+		System.out.println("a");
 		timer.scheduleAtFixedRate(new UpdateTimer(), 0, 1000);
+		System.out.println("b");
 	}
 	
 	public void cancelTimer() {
@@ -92,6 +97,14 @@ public class TPetModel extends Observable{
 		findStat(TPetWeight.class).set(weight);
 	}
 	
+	public int getHungriness() {
+		return findStat(TPetHungriness.class).get();
+	}
+	
+	public void setHungriness(int hungry) {
+		findStat(TPetHungriness.class).set(hungry);
+	}
+	
 	public List<TPetStat> getStats(){
 		return stats;
 	}
@@ -101,7 +114,13 @@ public class TPetModel extends Observable{
 		@Override
 		public void run() {
 			update();
+			System.out.println("Age:" + (float)getAge());
+
 			System.out.println("Age:" + getAge());
+			System.out.println("Health:" + getHealth());
+			System.out.println("Weight:" + getWeight());
+			System.out.println("Happiness:" + getHappiness());
+			System.out.println("Hungriness:" + getHungriness());
 		}
 	
 	}
