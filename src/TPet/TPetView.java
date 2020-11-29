@@ -12,6 +12,7 @@ public class TPetView extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		TPetController ctrl = new TPetController();
 		
 	}
 

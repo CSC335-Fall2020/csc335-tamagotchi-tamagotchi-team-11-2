@@ -15,7 +15,7 @@ public class TPetHappiness extends TPetStat{
 	}
 	
 	public TPetHappiness() {
-		super(50, (int)Double.POSITIVE_INFINITY); //Initiate data at 50. 10 ticks per update.
+		super(50, 3); //Initiate data at 50. 10 ticks per update.
 		mood = MOOD.Normal;
 	}
 	
