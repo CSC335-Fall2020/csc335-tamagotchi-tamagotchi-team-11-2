@@ -28,7 +28,7 @@ public class TPetHungriness extends TPetStat {
 	}  
 	
 	public void feed() { //feed food.. food class
-		data += 1;
+		data += 20;
 	}
 	
 	

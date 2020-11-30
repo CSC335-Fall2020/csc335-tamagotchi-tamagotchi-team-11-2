@@ -32,7 +32,7 @@ public class TPetModel extends Observable{
 		TPetHealth,
 		TPetWeight,
 		TPetHappiness,
-		TPetHungeriness
+		TPetHungriness
 	}
 	
 	public TPetModel() {
