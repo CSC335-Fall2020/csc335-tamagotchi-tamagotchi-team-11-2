@@ -30,11 +30,6 @@ public class TPetAge extends TPetStat {
 		data = age;
 	}
 	
-	public int get() {
-		
-		return age;
-	}
-	
 	public int getLifeSpan() {
 		return lifeSpan;
 	}

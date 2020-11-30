@@ -30,8 +30,7 @@ public class TPetHappiness extends TPetStat{
 		
 		//if health states is good with low percentage of getting sick
 		//	and hungriness is above 80, go happy
-		System.out.println(((TPetHealth)TPetController.getInstance().getStats().
-		get(TPetModel.StatIndex.TPetHealth.ordinal())).getIsSick());
+		System.out.println(((TPetHealth)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHealth.ordinal())).getIsSick());
 //		System.out.println("in happiness" + ((TPetHealth)TPetController.getInstance().getStats()));
 //		if() {
 //			this.data -= 1;

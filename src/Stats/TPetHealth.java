@@ -44,8 +44,4 @@ public class TPetHealth extends TPetStat {
 	private void sick() {
 		isSick = true;
 	}
-	
-	public int get() {
-		return health;
-	}
 }

@@ -12,7 +12,4 @@ public class TPetWeight extends TPetStat{
 
 		
 	}
-	public int get() {
-		return weight;
-	}
 }
