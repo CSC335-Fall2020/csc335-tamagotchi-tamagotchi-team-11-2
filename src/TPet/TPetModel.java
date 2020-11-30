@@ -11,6 +11,7 @@ import Stats.TPetHealth;
 import Stats.TPetHungriness;
 import Stats.TPetStat;
 import Stats.TPetWeight;
+import javafx.application.Platform;
 
 
 
@@ -113,14 +114,19 @@ public class TPetModel extends Observable{
 
 		@Override
 		public void run() {
-			update();
-			System.out.println("Age:" + (float)getAge());
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					update();
+					System.out.println("Age:" + (float)getAge());
 
-			System.out.println("Age:" + getAge());
-			System.out.println("Health:" + getHealth());
-			System.out.println("Weight:" + getWeight());
-			System.out.println("Happiness:" + getHappiness());
-			System.out.println("Hungriness:" + getHungriness());
+					System.out.println("Age:" + getAge());
+					System.out.println("Health:" + getHealth());
+					System.out.println("Weight:" + getWeight());
+					System.out.println("Happiness:" + getHappiness());
+					System.out.println("Hungriness:" + getHungriness());
+				}});
+			
 		}
 	
 	}

@@ -20,8 +20,6 @@ public class TPetAge extends TPetStat {
 //		data += 1;
 		lifeSpan -= 1; // 1000 is related with the period in TPetModel scheduleAtFixedRate(x,x, period)
 		try {
-//			int age = (600000 - lifeSpan)/60000;
-			System.out.println("in age");
 			age += 1;
 			if(age == lifeSpan) {
 				//pet dies
@@ -40,17 +38,6 @@ public class TPetAge extends TPetStat {
 	public int getLifeSpan() {
 		return lifeSpan;
 	}
-	
-//	public int getAge() {
-////		return (int) Math.floor(data/1000);
-//		try {
-//			int age = (600000 - lifeSpan)/60000;
-//			return age;
-//		}catch(Exception e){
-//			return 0;
-//		}
-//		
-//	}
 
 	
 }
