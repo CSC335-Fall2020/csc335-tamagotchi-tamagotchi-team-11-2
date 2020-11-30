@@ -17,7 +17,7 @@ public class TPetHungriness extends TPetStat {
 		List<TPetStat> stats = super.getStats();
 		System.out.println("stats in hungry: " + stats);
 		
-	}
+	}  
 	
 	public void feed() { //feed food.. food class
 		hungriness += 1;
