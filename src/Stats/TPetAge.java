@@ -19,7 +19,7 @@ public class TPetAge extends TPetStat {
 		System.out.println("stats in age: " + stats);
 //		data += 1;
 		lifeSpan -= 1; // 1000 is related with the period in TPetModel scheduleAtFixedRate(x,x, period)
-		try {
+		try { 
 			age += 1;
 			if(age == lifeSpan) {
 				//pet dies
