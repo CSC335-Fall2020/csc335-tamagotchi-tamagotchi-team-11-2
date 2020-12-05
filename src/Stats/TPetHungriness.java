@@ -9,26 +9,29 @@ public class TPetHungriness extends TPetStat {
 	
 	public TPetHungriness() {
 		super(100, 1);
-		
 	}
 	
 	@Override
 	public void update() {
 		if(!shouldUpdate()) return;
-		
-		double mood = ((TPetHappiness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHappiness.ordinal())).get();
-		
-		if (mood < 0) {
-			data -= 0.1;
-		}
-		
-		
 		data -= 0.1;
-		
+		if(data < 0) data = 0;
 	}  
 	
+	public boolean isHungry() {
+		return data < 20;
+	}
+	
+	public boolean isFull() {
+		return data > 90;
+	}
+	
 	public void feed() { //feed food.. food class
-		data += 20;
+		if(data + 20 > 100) {
+			data = 100;
+		} else {
+			data += 20;
+		}
 	}
 	
 	

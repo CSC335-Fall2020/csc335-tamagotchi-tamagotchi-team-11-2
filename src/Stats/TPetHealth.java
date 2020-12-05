@@ -27,29 +27,31 @@ public class TPetHealth extends TPetStat {
 	@Override
 	public void update() {
 		if(!shouldUpdate()) return;
-		//hungriness
-		//	if hungriness below 40, health -0.1 per second
+		List<TPetStat> stats = TPetController.getInstance().getStats();
 		
-		//happiness
-		//	if mood is sad,  health -0.1 per second
 		
 		//age
 		//	when age >= 80% of lifeSpan, then the max health drops
-		double hungry = ((TPetHungriness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHungriness.ordinal())).get();
+		TPetAge age = ((TPetAge)stats.get(TPetModel.StatIndex.TPetAge.ordinal()));
+		/*if(age.getAge() > age.getLifeSpan()) {
+			maxHealth -= 0.1;
+		}*/
+		
+		double hungry = ((TPetHungriness)stats.get(TPetModel.StatIndex.TPetHungriness.ordinal())).get();
 		if (hungry < 40) {
 			data -= 0.1;
 		}
 		
 		
-		double mood = ((TPetHappiness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHappiness.ordinal())).get();
+		double mood = ((TPetHappiness)stats.get(TPetModel.StatIndex.TPetHappiness.ordinal())).get();
 		if (mood < 0) {
 			data -= 0.1;
 		}
 		
-		double weight = ((TPetWeight)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetWeight.ordinal())).get();
-		double idealWeight = ((TPetWeight)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetWeight.ordinal())).getIdealWeight();
-		double rate = weight/idealWeight;
-		if (rate > 1.4 || rate < 0.6) {
+		double weight = ((TPetWeight)stats.get(TPetModel.StatIndex.TPetWeight.ordinal())).get();
+		double idealWeight = ((TPetWeight)stats.get(TPetModel.StatIndex.TPetWeight.ordinal())).getIdealWeight();
+		double weightRate = weight/idealWeight;
+		if (weightRate > 1.4 || weightRate < 0.6) {
 			data -= 0.1;
 		}
 		
@@ -71,6 +73,6 @@ public class TPetHealth extends TPetStat {
 	}
 	
 	public void hospital() {
-		data += 40;
+		data = data + 40 > maxHealth ? maxHealth : data + 40;
 	}
 }
