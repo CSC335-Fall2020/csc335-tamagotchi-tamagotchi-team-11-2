@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TPetStat {
 	private List<TPetStat> stats = new ArrayList<TPetStat>();
-	protected int data;
+	protected double data;
 	protected int tickPerUpdate; //How many ticks needed for an update;
 	protected int tick;
 	
@@ -22,7 +22,7 @@ public class TPetStat {
 		
 	}
 	
-	public int get() {
+	public double get() {
 		return data;
 	}
 	

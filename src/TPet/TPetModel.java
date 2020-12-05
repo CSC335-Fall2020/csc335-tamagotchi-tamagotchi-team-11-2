@@ -32,7 +32,7 @@ public class TPetModel extends Observable{
 		TPetHealth,
 		TPetWeight,
 		TPetHappiness,
-		TPetHungeriness
+		TPetHungriness
 	}
 	
 	public TPetModel() {
@@ -66,7 +66,7 @@ public class TPetModel extends Observable{
 		return null;
 	}
 	
-	public int getAge() {
+	public double getAge() {
 		return findStat(TPetAge.class).get();
 	}
 	
@@ -74,7 +74,7 @@ public class TPetModel extends Observable{
 		findStat(TPetAge.class).set(age);
 	}
 	
-	public int getHealth() {
+	public double getHealth() {
 		return findStat(TPetHealth.class).get();
 	}
 	
@@ -82,7 +82,7 @@ public class TPetModel extends Observable{
 		findStat(TPetHealth.class).set(health);
 	}
 	
-	public int getHappiness() {
+	public double getHappiness() {
 		return findStat(TPetHappiness.class).get();
 	}
 	
@@ -90,7 +90,7 @@ public class TPetModel extends Observable{
 		findStat(TPetHappiness.class).set(happiness);
 	}
 	
-	public int getWeight() {
+	public double getWeight() {
 		return findStat(TPetWeight.class).get();
 	}
 	
@@ -98,7 +98,7 @@ public class TPetModel extends Observable{
 		findStat(TPetWeight.class).set(weight);
 	}
 	
-	public int getHungriness() {
+	public double getHungriness() {
 		return findStat(TPetHungriness.class).get();
 	}
 	

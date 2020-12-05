@@ -2,29 +2,34 @@ package Stats;
 
 import java.util.List;
 
+import TPet.TPetController;
+import TPet.TPetModel;
+
 public class TPetHungriness extends TPetStat {
-	private int hungriness = 100;
 	
 	public TPetHungriness() {
-		super(100, 10);
+		super(100, 1);
 		
 	}
 	
 	@Override
 	public void update() {
 		if(!shouldUpdate()) return;
-		hungriness -= 1;
-		List<TPetStat> stats = super.getStats();
-		System.out.println("stats in hungry: " + stats);
 		
-	}
+		double mood = ((TPetHappiness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHappiness.ordinal())).get();
+		
+		if (mood < 0) {
+			data -= 0.1;
+		}
+		
+		
+		data -= 0.1;
+		
+	}  
 	
 	public void feed() { //feed food.. food class
-		hungriness += 1;
+		data += 20;
 	}
 	
-	public int get() {
-		return hungriness;
-	}
 	
 }

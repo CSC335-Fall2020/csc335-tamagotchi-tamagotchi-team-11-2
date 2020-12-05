@@ -15,7 +15,7 @@ public class TPetHappiness extends TPetStat{
 	}
 	
 	public TPetHappiness() {
-		super(50, (int)Double.POSITIVE_INFINITY); //Initiate data at 50. 10 ticks per update.
+		super(); //Initiate data at 50. 10 ticks per update.
 		mood = MOOD.Normal;
 	}
 	
@@ -24,18 +24,26 @@ public class TPetHappiness extends TPetStat{
 		if(!shouldUpdate()) return;
 		//when sick, high percentage of getting sick, mood goes sad
 		
-		//when hungriness below 50, go sa
-		List<TPetStat> stats = super.getStats();
-		System.out.println("stats in happy: " + stats);
+		//when hungriness below 50, go sad
 		
 		//if health states is good with low percentage of getting sick
 		//	and hungriness is above 80, go happy
-		System.out.println(((TPetHealth)TPetController.getInstance().getStats().
-		get(TPetModel.StatIndex.TPetHealth.ordinal())).getIsSick());
-//		System.out.println("in happiness" + ((TPetHealth)TPetController.getInstance().getStats()));
-//		if() {
-//			this.data -= 1;
-//		}
+//		System.out.println(((TPetHealth)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHealth.ordinal())).getIsSick());
+
+			
+		double hungry = ((TPetHungriness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHungriness.ordinal())).get();
+		boolean sick = ((TPetHealth)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHealth.ordinal())).getIsSick();
+		
+		if (hungry > 80 && !sick) {
+			mood = MOOD.Happy;
+			data = 1;
+		}else if(hungry < 50 || sick) {
+			mood = MOOD.Sad;
+			data = -1;
+		}else {
+			mood = MOOD.Normal;
+			data = 0;
+		}
 	}
 	
 }
