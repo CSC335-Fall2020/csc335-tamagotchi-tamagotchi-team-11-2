@@ -17,17 +17,12 @@ public class TPetAge extends TPetStat {
 		if(!shouldUpdate()) return;
 
 		List<TPetStat> stats = super.getStats();
-		//TPetHealth health = ((TPetHealth)stats.get(TPetModel.StatIndex.TPetHealth.ordinal()));
 		data += 1;
 	}
 	
 	public int getAge() {
 		return (int)data;
 	}
-	
-	/*public int getLifeSpan() {
-		return lifeSpan; 
-	}*/
 
 	
 }

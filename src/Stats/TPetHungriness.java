@@ -25,14 +25,4 @@ public class TPetHungriness extends TPetStat {
 	public boolean isFull() {
 		return data > 90;
 	}
-	
-	public void feed() { //feed food.. food class
-		if(data + 20 > 100) {
-			data = 100;
-		} else {
-			data += 20;
-		}
-	}
-	
-	
 }
