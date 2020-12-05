@@ -75,4 +75,13 @@ public class TPetHealth extends TPetStat {
 	public void hospital() {
 		data = data + 40 > maxHealth ? maxHealth : data + 40;
 	}
+	
+	public void decreaseHealth(int amount) {
+		data -= amount;
+		if(data < 0) {
+			data = 0;
+		} else if(data > maxHealth) {
+			data = maxHealth;
+		}
+	}
 }
