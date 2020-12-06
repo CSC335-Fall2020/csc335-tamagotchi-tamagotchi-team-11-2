@@ -1,10 +1,6 @@
 package Stats;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TPetStat {
-	private List<TPetStat> stats = new ArrayList<TPetStat>();
 	protected double data;
 	protected int tickPerUpdate; //How many ticks needed for an update;
 	protected int tick;
@@ -35,11 +31,4 @@ public class TPetStat {
 		return this.tick % this.tickPerUpdate == 0;
 	}
 	
-	public void addStat(TPetStat stat) {
-		stats.add(stat);
-	}
-	
-	public List<TPetStat> getStats(){
-		return stats;
-	}
 }

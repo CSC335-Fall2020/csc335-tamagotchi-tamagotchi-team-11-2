@@ -1,7 +1,5 @@
 package Stats;
 
-import java.util.List;
-
 import TPet.TPetController;
 import TPet.TPetModel;
 
@@ -15,8 +13,8 @@ public class TPetHappiness extends TPetStat{
 	}
 	
 	public TPetHappiness() {
-		super(); //Initiate data at 50. 10 ticks per update.
-		mood = MOOD.Normal;
+		super(100, 1); //Initiate data at 50. 10 ticks per update.
+		mood = MOOD.Happy;
 	}
 	
 	@Override
@@ -34,15 +32,49 @@ public class TPetHappiness extends TPetStat{
 		double hungry = ((TPetHungriness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHungriness.ordinal())).get();
 		boolean sick = ((TPetHealth)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHealth.ordinal())).getIsSick();
 		
-		if (hungry > 80 && !sick) {
-			mood = MOOD.Happy;
-			data = 1;
-		}else if(hungry < 50 || sick) {
-			mood = MOOD.Sad;
-			data = -1;
-		}else {
-			mood = MOOD.Normal;
+		if (hungry < 40 || sick) {
+			data -= 5;
+		}else if(hungry > 80 && !sick) {
+			data += 5;
+		}else { // 40 < hungry < 80 && !sick
+			data += 1;
+		}
+		
+		if(data < 0) {
 			data = 0;
+		} else if(data > 100) {
+			data = 100;
+		}
+		if(data < 40) {
+			mood = MOOD.Sad;
+		} else if(data < 60) {
+			mood = MOOD.Normal;
+		} else {
+			mood = MOOD.Happy;
+		}
+		System.out.println("happiness: " + data);
+		//when sick, high percentage of getting sick, mood goes sad
+		
+		//when hungriness below 50, go sad
+	}
+	
+	public MOOD getMood() {
+		return mood;
+	}
+	
+	public void beSad() {
+		mood = MOOD.Sad;
+	}
+	
+	public void increaseMood(double amount) {
+		if (data < 100) {
+			data += amount;
+		}
+	}
+	
+	public void decreaseMood(double amount) {
+		if (0 < data) {
+			data -= amount;
 		}
 	}
 	

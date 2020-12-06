@@ -35,22 +35,33 @@ public class TPetHealth extends TPetStat {
 		
 		//age
 		//	when age >= 80% of lifeSpan, then the max health drops
-		double hungry = ((TPetHungriness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHungriness.ordinal())).get();
-		if (hungry < 40) {
-			data -= 0.1;
-		}
-		
-		
-		double mood = ((TPetHappiness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHappiness.ordinal())).get();
-		if (mood < 0) {
-			data -= 0.1;
-		}
-		
-		double weight = ((TPetWeight)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetWeight.ordinal())).get();
-		double idealWeight = ((TPetWeight)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetWeight.ordinal())).getIdealWeight();
-		double rate = weight/idealWeight;
-		if (rate > 1.4 || rate < 0.6) {
-			data -= 0.1;
+		if(data > 0) {
+			List<TPetStat> stats = TPetController.getInstance().getStats();
+			TPetAge age = ((TPetAge)stats.get(TPetModel.StatIndex.TPetAge.ordinal()));
+//			if(age.get() > age.getLifeSpan() * 0.8) {
+//				maxHealth -= 0.1;
+//				if (data > maxHealth) {
+//					data = maxHealth;
+//				}
+//			}
+//			
+			double hungry = ((TPetHungriness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHungriness.ordinal())).get();
+			if (hungry < 40) {
+				data -= 0.1;
+			}
+			
+			
+			double mood = ((TPetHappiness)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetHappiness.ordinal())).get();
+			if (mood < 40) {
+				data -= 0.1;
+			}
+			
+			double weight = ((TPetWeight)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetWeight.ordinal())).get();
+			double idealWeight = ((TPetWeight)TPetController.getInstance().getStats().get(TPetModel.StatIndex.TPetWeight.ordinal())).getIdealWeight();
+			double rate = weight/idealWeight;
+			if (rate > 1.4 || rate < 0.7) {
+				data -= 0.1;
+			}
 		}
 		
 		if (data < 40) {
@@ -72,5 +83,19 @@ public class TPetHealth extends TPetStat {
 	
 	public void hospital() {
 		data += 40;
+		System.out.println("hospital");
+		if(data >= 100) {
+			System.out.println("hospital too much");
+			data = 100;
+		}
+	}
+	
+	public void decreaseHealth(int amount) {
+		data -= amount;
+		if(data < 0) {
+			data = 0;
+		} else if(data > maxHealth) {
+			data = maxHealth;
+		}
 	}
 }

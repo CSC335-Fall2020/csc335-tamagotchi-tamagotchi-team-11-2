@@ -1,36 +1,26 @@
 package Stats;
 
-import java.util.List;
-
 public class TPetAge extends TPetStat {
 	
-	private int lifeSpan = 600; //10 mins
-	private int age = 0;
+	private double lifeSpan = 600; //10 mins
 	
 	public TPetAge() {
-		
+		super(0, 1);
 	}
 	
 	@Override
 	public void update() {
 		if(!shouldUpdate()) return;
 
-		List<TPetStat> stats = super.getStats();
-		System.out.println("stats in age: " + stats);
-//		data += 1;
-		lifeSpan -= 1; // 1000 is related with the period in TPetModel scheduleAtFixedRate(x,x, period)
-		try { 
-			age += 1;
-			if(age == lifeSpan) {
-				//pet dies
-			}
-		}catch(Exception e){
-			age = 0;
+		data += 1;
+//		lifeSpan -= 1; // 1000 is related with the period in TPetModel scheduleAtFixedRate(x,x, period)
+
+		if (data == lifeSpan) {
+			//pet dies
 		}
-		data = age;
 	}
 	
-	public int getLifeSpan() {
+	public double getLifeSpan() {
 		return lifeSpan;
 	}
 
