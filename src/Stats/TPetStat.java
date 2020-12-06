@@ -22,8 +22,8 @@ public class TPetStat {
 		return data;
 	}
 	
-	public void set(int data) {
-//		this.data = data;
+	public void set(double data) {
+		this.data = data;
 	}
 	
 	public boolean shouldUpdate() {

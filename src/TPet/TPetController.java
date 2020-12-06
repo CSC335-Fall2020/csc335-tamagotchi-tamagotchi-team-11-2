@@ -1,5 +1,14 @@
 package TPet;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import Food.Food;
@@ -96,6 +105,46 @@ public class TPetController {
 			money.spendMoney(500);
 			health.hospital();
 		}
+	}
+	
+	public void autoSave() {
+		saveGame("save.tpetdat");
+	}
+	
+	public void saveGame(String filename) {
+		TPetSave save = new TPetSave();
+		try {
+			FileOutputStream fos = new FileOutputStream(filename);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(save);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadGame(String filename) {
+		TPetSave save = null;
+		
+		try {
+			FileInputStream fis = new FileInputStream(filename);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			Object obj = ois.readObject();
+			if(!(obj instanceof TPetSave)) return;
+			save = (TPetSave)obj;
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		if(save == null) return;
+		
+		List<TPetStat> stats = TPetController.getInstance().getStats();
+		stats.get(TPetModel.StatIndex.TPetAge.ordinal()).set(save.getAge());
+		stats.get(TPetModel.StatIndex.TPetHealth.ordinal()).set(save.getHealth());
+		stats.get(TPetModel.StatIndex.TPetMoney.ordinal()).set(save.getMoney());
+		stats.get(TPetModel.StatIndex.TPetHungriness.ordinal()).set(save.getHungriness());
+		stats.get(TPetModel.StatIndex.TPetHappiness.ordinal()).set(save.getHappiness());
+		stats.get(TPetModel.StatIndex.TPetWeight.ordinal()).set(save.getWeight());
+		return;
 	}
 	 
 }

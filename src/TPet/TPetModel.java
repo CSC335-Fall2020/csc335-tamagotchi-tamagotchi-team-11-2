@@ -29,6 +29,7 @@ import javafx.application.Platform;
 public class TPetModel extends Observable{
 	private List<TPetStat> stats;
 	private Timer timer;
+	private int autoSaveTicker = 0;
 	
 	public static enum StatIndex{
 		TPetAge,
@@ -62,6 +63,10 @@ public class TPetModel extends Observable{
 	public void update() {
 		for(TPetStat s : stats) {
 			s.update();
+		}
+		if(autoSaveTicker++ == 30) {
+			autoSaveTicker = 0;
+			TPetController.getInstance().autoSave();
 		}
 	}
 	
