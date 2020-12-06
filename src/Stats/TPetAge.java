@@ -6,7 +6,7 @@ import TPet.TPetModel;
 
 public class TPetAge extends TPetStat {
 	
-	//private int lifeSpan = 600; // Expected living time
+
 	
 	public TPetAge() {
 		super(0, 1);
@@ -16,12 +16,16 @@ public class TPetAge extends TPetStat {
 	public void update() {
 		if(!shouldUpdate()) return;
 
-		List<TPetStat> stats = super.getStats();
+
 		data += 1;
+//		lifeSpan -= 1; // 1000 is related with the period in TPetModel scheduleAtFixedRate(x,x, period)
+
 	}
 	
+
 	public int getAge() {
 		return (int)data;
+
 	}
 
 	

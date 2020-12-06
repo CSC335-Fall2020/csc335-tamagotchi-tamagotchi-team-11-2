@@ -1,7 +1,4 @@
 package TPet;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javafx.application.Application;
 
 /*

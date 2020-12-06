@@ -73,7 +73,12 @@ public class TPetHealth extends TPetStat {
 	}
 	
 	public void hospital() {
-		data = data + 40 > maxHealth ? maxHealth : data + 40;
+		data += 40;
+		System.out.println("hospital");
+		if(data >= 100) {
+			System.out.println("hospital too much");
+			data = 100;
+		}
 	}
 	
 	public void decreaseHealth(int amount) {

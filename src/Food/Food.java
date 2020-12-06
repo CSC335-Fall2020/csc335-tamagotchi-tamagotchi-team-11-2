@@ -10,11 +10,14 @@ public class Food {
 	private FoodType type;
 	private double hungryIncrease;
 	private double happinessIncrease;
+
+	private double price; 
 	
-	public Food(FoodType type, double hungryIncrease, double happinessIncrease) {
+	public Food(FoodType type, double hungryIncrease, double happinessIncrease, double price) {
 		this.type = type;
 		this.hungryIncrease = hungryIncrease;
 		this.happinessIncrease = happinessIncrease;
+		this.price = price;
 	}
 	
 	public double getHungryIncrease() {
@@ -27,5 +30,9 @@ public class Food {
 	
 	public FoodType getType() {
 		return type;
+	}
+	
+	public double getPrice() {
+		return price;
 	}
 }
