@@ -29,6 +29,7 @@ import Stats.TPetStat;
  */
 
 public class TPetController {
+	public static final String SAVEFILE_NAME = "save.tpetdat";
 	private TPetModel model;
 	public static TPetController _instance;
 	
@@ -39,6 +40,12 @@ public class TPetController {
 	public TPetController(TPetModel model) {
 		this.model = model;
 		_instance = this;
+		
+		// Try to load auto-saved save
+		File file = new File(SAVEFILE_NAME);
+		if(file.exists()) {
+			loadGame(SAVEFILE_NAME);
+		}
 	}
 	
 	public static TPetController getInstance() {
@@ -108,7 +115,7 @@ public class TPetController {
 	}
 	
 	public void autoSave() {
-		saveGame("save.tpetdat");
+		saveGame(SAVEFILE_NAME);
 	}
 	
 	public void saveGame(String filename) {
