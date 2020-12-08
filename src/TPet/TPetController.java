@@ -155,7 +155,7 @@ public class TPetController {
 		
 		if(save == null) return false;
 		
-		List<TPetStat> stats = TPetController.getInstance().getStats();
+		List<TPetStat> stats = getStats();
 		stats.get(TPetModel.StatIndex.TPetAge.ordinal()).set(save.getAge());
 		stats.get(TPetModel.StatIndex.TPetHealth.ordinal()).set(save.getHealth());
 		stats.get(TPetModel.StatIndex.TPetMoney.ordinal()).set(save.getMoney());
@@ -166,6 +166,14 @@ public class TPetController {
 	}
 	 
 	public boolean triggerEffect(Class<? extends TPetEffect> c) {
+		TPetMoney money = (TPetMoney)getStats().get(TPetModel.StatIndex.TPetMoney.ordinal());
+		// If money < 1000, return false
+		if(money.get() < 1000) {
+			return false;
+		}
+		// 1000 per effect
+		money.set(money.get() - 1000);
+		
 		boolean alreadyTriggered = false;
 		for(TPetEffect e : model.getEffects()) {
 			alreadyTriggered |= c.isInstance(e);

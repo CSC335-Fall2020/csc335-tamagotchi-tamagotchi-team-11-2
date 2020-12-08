@@ -169,7 +169,9 @@ public class TPetView extends Application implements Observer{
 				if(ctrl.triggerEffect(TPetEffect1.class)) {
 					a.setContentText("Success!");
 				} else {
-					a.setContentText("Failed!");
+					a.setContentText("Failed! "
+							+ "\nNot enough money or already activated! "
+							+ "\nPrice: 1000");
 				}
 				a.show();
 			});
@@ -177,7 +179,9 @@ public class TPetView extends Application implements Observer{
 				if(ctrl.triggerEffect(TPetEffect2.class)) {
 					a.setContentText("Success!");
 				} else {
-					a.setContentText("Failed!");
+					a.setContentText("Failed! "
+							+ "\nNot enough money or already activated! "
+							+ "\nPrice: 1000");
 				}
 				a.show();
 			});
@@ -191,7 +195,9 @@ public class TPetView extends Application implements Observer{
 					if(ctrl.feed(drug)) {
 						a.setContentText("Success!");
 					} else {
-						a.setContentText("Failed!");
+						a.setContentText("Failed! "
+								+ "\nNot enough money! "
+								+ "\nPrice: " + drug.getPrice());
 					}
 					a.show();
 				}
@@ -207,7 +213,9 @@ public class TPetView extends Application implements Observer{
 					if(ctrl.feed(drug)) {
 						a.setContentText("Success!");
 					} else {
-						a.setContentText("Failed!");
+						a.setContentText("Failed! "
+								+ "\nNot enough money! "
+								+ "\nPrice: " + drug.getPrice());
 					}
 					a.show();
 				}
@@ -224,7 +232,9 @@ public class TPetView extends Application implements Observer{
 					if(ctrl.feed(drug)) {
 						a.setContentText("Success!");
 					} else {
-						a.setContentText("Failed!");
+						a.setContentText("Failed! "
+								+ "\nNot enough money! "
+								+ "\nPrice: " + drug.getPrice());
 					}
 					a.show();
 				}
@@ -241,7 +251,9 @@ public class TPetView extends Application implements Observer{
 					if(ctrl.feed(drug)) {
 						a.setContentText("Success!");
 					} else {
-						a.setContentText("Failed!");
+						a.setContentText("Failed! "
+								+ "\nNot enough money! "
+								+ "\nPrice: " + drug.getPrice());
 					}
 					a.show();
 				}
@@ -258,7 +270,9 @@ public class TPetView extends Application implements Observer{
 					if(ctrl.feed(drug)) {
 						a.setContentText("Success!");
 					} else {
-						a.setContentText("Failed!");
+						a.setContentText("Failed! "
+								+ "\nNot enough money! "
+								+ "\nPrice: " + drug.getPrice());
 					}
 					a.show();
 				}
@@ -299,7 +313,9 @@ public class TPetView extends Application implements Observer{
 			if(ctrl.goHospital()) {
 				a.setContentText("Success!");
 			} else {
-				a.setContentText("Failed!");
+				a.setContentText("Failed! "
+						+ "\nNot enough money! "
+						+ "\nPrice: 500");
 			}
 			a.show();
 		});
@@ -399,7 +415,13 @@ public class TPetView extends Application implements Observer{
 //			String path = "img/Happy.png";
 			Image image = null;
 			try {
+				TPetHealth health = (TPetHealth)TPetController.getInstance().getStats()
+						.get(TPetModel.StatIndex.TPetHealth.ordinal());
+				if(health.getIsSick()) {
+					image = new Image(new FileInputStream("img/" + "death" + ".png"));
+				} else {
 				image = new Image(new FileInputStream("img/" + mood + ".png"));
+				}
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
