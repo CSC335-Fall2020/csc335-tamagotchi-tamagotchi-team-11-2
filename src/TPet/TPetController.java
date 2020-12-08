@@ -19,6 +19,8 @@ import Stats.TPetHungriness;
 
 import Stats.TPetMoney;
 import Stats.TPetStat;
+import TPetEffect.TPetEffect;
+import javafx.scene.effect.Effect;
 
 /*
  * Team Project
@@ -61,7 +63,7 @@ public class TPetController {
 		return model;
 	}
 	
-	public void feed(Food food) {
+	public boolean feed(Food food) {
 		List<TPetStat> stats = TPetController.getInstance().getStats();
 		TPetMoney money = (TPetMoney)stats.get(TPetModel.StatIndex.TPetMoney.ordinal());
 		
@@ -83,10 +85,12 @@ public class TPetController {
 				hungriness.increaseHungriness(food.getHungryIncrease());
 				money.spendMoney(food.getPrice());
 			}
+			return true;
 		}
+		return false;
 	}
 	
-	public void makeMoney() {
+	public boolean makeMoney() {
 
 		List<TPetStat> stats = TPetController.getInstance().getStats();
 		TPetMoney money = (TPetMoney)stats.get(TPetModel.StatIndex.TPetMoney.ordinal());
@@ -99,11 +103,13 @@ public class TPetController {
 			health.decreaseHealth(5);
 			happiness.decreaseMood(10);
 			hungriness.decreaseHungriness(20);
+			return true;
 		}
+		return false;
 		
 	}
 	
-	public void goHospital() {
+	public boolean goHospital() {
 		List<TPetStat> stats = TPetController.getInstance().getStats();
 		TPetMoney money = (TPetMoney)stats.get(TPetModel.StatIndex.TPetMoney.ordinal());
 		TPetHealth health = (TPetHealth)stats.get(TPetModel.StatIndex.TPetHealth.ordinal());
@@ -111,38 +117,43 @@ public class TPetController {
 		if (money.get() >= 500) {
 			money.spendMoney(500);
 			health.hospital();
+			return true;
 		}
+		return false;
 	}
 	
 	public void autoSave() {
 		saveGame(SAVEFILE_NAME);
 	}
 	
-	public void saveGame(String filename) {
+	public boolean saveGame(String filename) {
 		TPetSave save = new TPetSave();
 		try {
 			FileOutputStream fos = new FileOutputStream(filename);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(save);
+			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 	
-	public void loadGame(String filename) {
+	public boolean loadGame(String filename) {
 		TPetSave save = null;
 		
 		try {
 			FileInputStream fis = new FileInputStream(filename);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			Object obj = ois.readObject();
-			if(!(obj instanceof TPetSave)) return;
+			if(!(obj instanceof TPetSave)) return false;
 			save = (TPetSave)obj;
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
-		if(save == null) return;
+		if(save == null) return false;
 		
 		List<TPetStat> stats = TPetController.getInstance().getStats();
 		stats.get(TPetModel.StatIndex.TPetAge.ordinal()).set(save.getAge());
@@ -151,7 +162,25 @@ public class TPetController {
 		stats.get(TPetModel.StatIndex.TPetHungriness.ordinal()).set(save.getHungriness());
 		stats.get(TPetModel.StatIndex.TPetHappiness.ordinal()).set(save.getHappiness());
 		stats.get(TPetModel.StatIndex.TPetWeight.ordinal()).set(save.getWeight());
-		return;
+		return true;
 	}
 	 
+	public boolean triggerEffect(Class<? extends TPetEffect> c) {
+		boolean alreadyTriggered = false;
+		for(TPetEffect e : model.getEffects()) {
+			alreadyTriggered |= c.isInstance(e);
+		}
+		if(!alreadyTriggered) {
+			try {
+				model.addEffect(c.newInstance());
+			} catch (InstantiationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IllegalAccessException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return !alreadyTriggered;
+	}
 }

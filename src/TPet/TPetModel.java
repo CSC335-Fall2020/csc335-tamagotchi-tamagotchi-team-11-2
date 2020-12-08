@@ -14,6 +14,8 @@ import Stats.TPetHungriness;
 import Stats.TPetMoney;
 import Stats.TPetStat;
 import Stats.TPetWeight;
+import TPetEffect.TPetEffect;
+import TPetEffect.TPetEffect1;
 import javafx.application.Platform;
 
 
@@ -28,6 +30,7 @@ import javafx.application.Platform;
 
 public class TPetModel extends Observable{
 	private List<TPetStat> stats;
+	private List<TPetEffect> effects;
 	private Timer timer;
 	private int autoSaveTicker = 0;
 	
@@ -48,12 +51,23 @@ public class TPetModel extends Observable{
 		stats.add(new TPetHappiness());
 		stats.add(new TPetHungriness());
 		stats.add(new TPetMoney());
+		
+		effects = new ArrayList<TPetEffect>();
+		//effects.add(new TPetEffect1());
 
 		timer = new Timer(true);
 //		System.out.println("a");
 		timer.scheduleAtFixedRate(new UpdateTimer(), 0, 1000);
 //		System.out.println("b");
 		
+	}
+	
+	public void addEffect(TPetEffect effect) {
+		this.effects.add(effect);
+	}
+	
+	public List<TPetEffect> getEffects(){
+		return effects;
 	}
 	
 	public void cancelTimer() {
@@ -63,6 +77,9 @@ public class TPetModel extends Observable{
 	public void update() {
 		for(TPetStat s : stats) {
 			s.update();
+		}
+		for(TPetEffect e : effects) {
+			e.update();
 		}
 		if(autoSaveTicker++ == 30) {
 			autoSaveTicker = 0;

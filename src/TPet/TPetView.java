@@ -20,14 +20,19 @@ import Stats.TPetHungriness;
 import Stats.TPetMoney;
 import Stats.TPetStat;
 import Stats.TPetWeight;
+import TPetEffect.TPetEffect1;
+import TPetEffect.TPetEffect2;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -35,6 +40,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -45,14 +51,38 @@ import javafx.stage.Stage;
  */
 
 public class TPetView extends Application implements Observer{
-	private BorderPane borderpane = new BorderPane();
-
-	private String filename = "save.txt";
+	private static BorderPane borderpane = new BorderPane();
+	public static final int IMAGE_WIDTH = 300;
+	public static final int IMAGE_HEIGHT = 180;
+	
+	
 
 	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		//
+		//--------------------image display starts--------------------
+						String path = "img/Normal.png";
+						Image image = new Image(new FileInputStream(path));
+						StackPane imagePane = new StackPane();
+						imagePane.setMaxHeight(IMAGE_HEIGHT);
+						imagePane.setMaxWidth(IMAGE_WIDTH);
+						
+						ImageView imageView = new ImageView();
+						imageView.setImage(image);
+						imageView.setFitWidth(IMAGE_WIDTH);
+						imageView.setFitHeight(IMAGE_HEIGHT);
+//						VBox imageBox = new VBox();
+//						imageBox.getChildren().addAll(image);
+						imagePane.getChildren().add(imageView);
+						borderpane.setCenter(imagePane);
+				
+						
+				
+		//--------------------image desplay ends--------------------	
+		//
+		
 		TPetModel model = new TPetModel();
 		TPetController ctrl = new TPetController(model);
 		model.deleteObservers();
@@ -107,29 +137,9 @@ public class TPetView extends Application implements Observer{
 		statsBar.getChildren().add(moneyLabel);
 		statsBar.getChildren().add(moneyPointsLabel);
 		
+		statsBar.setPadding(new Insets(0,15,0,0));
 		borderpane.setTop(statsBar);
 		
-//--------------------save and loading button-------------------------
-		
-		HBox BottomBar = new HBox();
-		Button save = new Button("Save");
-		Button load = new Button("Loading");
-		save.setOnMouseClicked(new EventHandler<Event>(){
-			@Override
-			public void handle(Event event) {
-				File creadteFile = new File(filename);
-				ctrl.saveGame(filename);
-			}
-		});
-		load.setOnMouseClicked(new EventHandler<Event>(){
-			@Override
-			public void handle(Event event) {
-				ctrl.loadGame(filename);
-			}
-		});
-		BottomBar.getChildren().add(save);
-		BottomBar.getChildren().add(load);
-		borderpane.setBottom(BottomBar);
 		
 //--------------------top stats bar ends--------------------
 //
@@ -137,19 +147,40 @@ public class TPetView extends Application implements Observer{
 		
 		VBox vbox = new VBox();
 		vbox.setSpacing(10);
-		vbox.setPadding(new Insets(0,10,0,0));
-		
+		vbox.setPadding(new Insets(15,15,15,0));
+		Alert a = new Alert(AlertType.CONFIRMATION);
+		a.setHeaderText("");
 		int buttonWidth = 80;
 		
 		//store
-		Button store = new Button("Food Store");
+		Button store = new Button("Store");
 		store.setOnMouseClicked((event)->{
 //			((TPetHungriness)hungriness).eat();
+			
 			Button drug = new Button("Mental Care");
 			Button Lmeal = new Button("Meal-Large");
 			Button Smeal = new Button("Meal-Small");
 			Button Lsnack = new Button("Snack-Large");
 			Button Ssnack = new Button("Snack-Small");
+			Button effectRedBubble = new Button("Effect: Red Bubble");
+			Button effectAquaRect = new Button("Effect: Aqua Rect");
+			
+			effectRedBubble.setOnMouseClicked((evt) ->{
+				if(ctrl.triggerEffect(TPetEffect1.class)) {
+					a.setContentText("Success!");
+				} else {
+					a.setContentText("Failed!");
+				}
+				a.show();
+			});
+			effectAquaRect.setOnMouseClicked((evt) ->{
+				if(ctrl.triggerEffect(TPetEffect2.class)) {
+					a.setContentText("Success!");
+				} else {
+					a.setContentText("Failed!");
+				}
+				a.show();
+			});
 			
 			drug.setOnMouseClicked(new EventHandler<Event>() {
 
@@ -157,7 +188,12 @@ public class TPetView extends Application implements Observer{
 				public void handle(Event event) {
 					// TODO Auto-generated method stub
 					Food drug = new Drug();
-					ctrl.feed(drug);
+					if(ctrl.feed(drug)) {
+						a.setContentText("Success!");
+					} else {
+						a.setContentText("Failed!");
+					}
+					a.show();
 				}
 				
 			});
@@ -168,7 +204,12 @@ public class TPetView extends Application implements Observer{
 				public void handle(Event event) {
 					// TODO Auto-generated method stub
 					Food drug = new LargeMeal();
-					ctrl.feed(drug);
+					if(ctrl.feed(drug)) {
+						a.setContentText("Success!");
+					} else {
+						a.setContentText("Failed!");
+					}
+					a.show();
 				}
 				
 			});
@@ -180,7 +221,12 @@ public class TPetView extends Application implements Observer{
 				public void handle(Event event) {
 					// TODO Auto-generated method stub
 					Food drug = new LittleMeal();
-					ctrl.feed(drug);
+					if(ctrl.feed(drug)) {
+						a.setContentText("Success!");
+					} else {
+						a.setContentText("Failed!");
+					}
+					a.show();
 				}
 				
 			});
@@ -192,7 +238,12 @@ public class TPetView extends Application implements Observer{
 				public void handle(Event event) {
 					// TODO Auto-generated method stub
 					Food drug = new LargeSnack();
-					ctrl.feed(drug);
+					if(ctrl.feed(drug)) {
+						a.setContentText("Success!");
+					} else {
+						a.setContentText("Failed!");
+					}
+					a.show();
 				}
 				
 			});
@@ -204,23 +255,28 @@ public class TPetView extends Application implements Observer{
 				public void handle(Event event) {
 					// TODO Auto-generated method stub
 					Food drug = new LittleSnack();
-					ctrl.feed(drug);
+					if(ctrl.feed(drug)) {
+						a.setContentText("Success!");
+					} else {
+						a.setContentText("Failed!");
+					}
+					a.show();
 				}
 				
 			});
 			
 			
 			HBox storeHbox = new HBox();
-			storeHbox.getChildren().addAll(drug, Lmeal, Smeal, Lsnack, Ssnack);
+			storeHbox.getChildren().addAll(drug, Lmeal, Smeal, Lsnack, Ssnack, effectRedBubble, effectAquaRect);
 			storeHbox.setSpacing(10);
 			storeHbox.setPadding(new Insets(10, 10, 10, 10));
+			storeHbox.setAlignment(Pos.CENTER);
 			
 			
-			
-			Scene storeScene = new Scene(storeHbox, 600, 50);
+			Scene storeScene = new Scene(storeHbox, 750, 50);
 			Stage storeStage = new Stage();
 			storeStage.setScene(storeScene);
-			storeStage.setTitle("Food Store");
+			storeStage.setTitle("Store");
 			storeStage.showAndWait();
 			
 		});
@@ -239,7 +295,13 @@ public class TPetView extends Application implements Observer{
 		Button hospital = new Button("hospital");
 		hospital.setOnMouseClicked((event)->{
 //			((TPetHealth)health).hospital();
-			ctrl.goHospital();
+			
+			if(ctrl.goHospital()) {
+				a.setContentText("Success!");
+			} else {
+				a.setContentText("Failed!");
+			}
+			a.show();
 		});
 		hospital.setPrefWidth(buttonWidth);
 		vbox.getChildren().add(hospital);
@@ -249,38 +311,62 @@ public class TPetView extends Application implements Observer{
 		Button work = new Button("work");
 		work.setOnMouseClicked((event)->{
 //			((TPetMoney)money).earnMoney(50);
-			ctrl.makeMoney();
+			if(ctrl.makeMoney()) {
+				a.setContentText("Success!");
+			} else {
+				a.setContentText("Failed!");
+			}
+			a.show();
 		});
 		work.setPrefWidth(buttonWidth);
 		vbox.getChildren().add(work);
 		
+		Button save = new Button("Save");
+		Button load = new Button("Load");
+		save.setOnMouseClicked(new EventHandler<Event>(){
+			@Override
+			public void handle(Event event) {
+				if(ctrl.saveGame(TPetController.SAVEFILE_NAME)) {
+					a.setContentText("Success!");
+				} else {
+					a.setContentText("Failed!");
+				}
+				a.show();
+			}
+		});
+		load.setOnMouseClicked(new EventHandler<Event>(){
+			@Override
+			public void handle(Event event) {
+				if(ctrl.loadGame(TPetController.SAVEFILE_NAME)) {
+					a.setContentText("Success!");
+				} else {
+					a.setContentText("Failed!");
+				}
+				a.show();
+				
+			}
+		});
+		save.setPrefWidth(buttonWidth);
+		load.setPrefWidth(buttonWidth);
+		vbox.getChildren().add(save);
+		vbox.getChildren().add(load);
+		
 		borderpane.setRight(vbox);
 		
 //--------------------right buttons ends--------------------		
-//
-//--------------------image display starts--------------------
-		String path = "img/Normal.png";
-		Image image = new Image(new FileInputStream(path));
-		
-		ImageView imageView = new ImageView();
-		imageView.setImage(image);
-		imageView.setFitWidth(300);
-		imageView.setFitHeight(180);
-//		VBox imageBox = new VBox();
-//		imageBox.getChildren().addAll(image);
-		borderpane.setCenter(imageView);
-		
-		
-//--------------------image desplay ends--------------------	
-//
+
 //--------------------	display	--------------------
 		
-		Scene scene = new Scene(borderpane,500,300);
+		Scene scene = new Scene(borderpane, 600, 270);
 		
 		primaryStage.setTitle("Tomagotchi-T11");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
+	}
+	
+	public static StackPane getImagePane() {
+		return (StackPane) borderpane.getCenter();
 	}
 
 	@Override
@@ -307,7 +393,7 @@ public class TPetView extends Application implements Observer{
 			}
 		}
 
-		ImageView imageView = ((ImageView)borderpane.getCenter());
+		ImageView imageView = ((ImageView)((StackPane)borderpane.getCenter()).getChildren().get(0));
 		
 		if(imageView instanceof ImageView) {
 //			String path = "img/Happy.png";
