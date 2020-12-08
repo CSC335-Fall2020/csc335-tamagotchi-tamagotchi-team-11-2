@@ -70,53 +70,6 @@ public class TPetModel extends Observable{
 		}
 	}
 	
-	private TPetStat findStat(Class<?> c) {
-		for(TPetStat s : stats) {
-			if(s.getClass().equals(c)) return s;
-		}
-		return null;
-	}
-	
-	public double getAge() {
-		return findStat(TPetAge.class).get();
-	}
-	
-	public void setAge(int age) {
-		findStat(TPetAge.class).set(age);
-	}
-	
-	public double getHealth() {
-		return findStat(TPetHealth.class).get();
-	}
-	
-	public void setHealth(int health) {
-		findStat(TPetHealth.class).set(health);
-	}
-	
-	public double getHappiness() {
-		return findStat(TPetHappiness.class).get();
-	}
-	
-	public void setHappiness(int happiness) {
-		findStat(TPetHappiness.class).set(happiness);
-	}
-	
-	public double getWeight() {
-		return findStat(TPetWeight.class).get();
-	}
-	
-	public void setWeight(int weight) {
-		findStat(TPetWeight.class).set(weight);
-	}
-	
-	public double getHungriness() {
-		return findStat(TPetHungriness.class).get();
-	}
-	
-	public void setHungriness(int hungry) {
-		findStat(TPetHungriness.class).set(hungry);
-	}
-	
 	public List<TPetStat> getStats(){
 		return stats;
 	}
@@ -124,7 +77,7 @@ public class TPetModel extends Observable{
 		System.out.println("in refresh");
 		System.out.println(this.countObservers());
 		this.setChanged();
-		this.notifyObservers("abc");
+		//this.notifyObservers("abc");
 //		this.notifyObservers();
 	}
 	private class UpdateTimer extends TimerTask{
