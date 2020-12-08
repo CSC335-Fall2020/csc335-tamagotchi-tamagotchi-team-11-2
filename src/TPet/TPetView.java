@@ -1,4 +1,5 @@
 package TPet;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
@@ -28,6 +29,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -43,6 +45,7 @@ import javafx.stage.Stage;
 
 public class TPetView extends Application implements Observer{
 	private BorderPane borderpane = new BorderPane();
+	private String filename = "save.txt";
 	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -89,7 +92,6 @@ public class TPetView extends Application implements Observer{
 		Label moneyPointsLabel = new Label(moneyPoints);
 		
 		HBox statsBar = new HBox();
-		
 		statsBar.getChildren().add(healthLabel);
 		statsBar.getChildren().add(healthPointsLabel);
 		statsBar.getChildren().add(moodLabel);
@@ -103,6 +105,27 @@ public class TPetView extends Application implements Observer{
 		
 		borderpane.setTop(statsBar);
 		
+//--------------------save and loading button-------------------------
+		
+		HBox BottomBar = new HBox();
+		Button save = new Button("Save");
+		Button load = new Button("Loading");
+		save.setOnMouseClicked(new EventHandler<Event>(){
+			@Override
+			public void handle(Event event) {
+				File creadteFile = new File(filename);
+				ctrl.saveGame(filename);
+			}
+		});
+		load.setOnMouseClicked(new EventHandler<Event>(){
+			@Override
+			public void handle(Event event) {
+				ctrl.loadGame(filename);
+			}
+		});
+		BottomBar.getChildren().add(save);
+		BottomBar.getChildren().add(load);
+		borderpane.setBottom(BottomBar);
 		
 //--------------------top stats bar ends--------------------
 //
@@ -248,7 +271,7 @@ public class TPetView extends Application implements Observer{
 //
 //--------------------	display	--------------------
 		
-		Scene scene = new Scene(borderpane,500,204);
+		Scene scene = new Scene(borderpane,500,300);
 		
 		primaryStage.setTitle("Tomagotchi-T11");
 		primaryStage.setScene(scene);
