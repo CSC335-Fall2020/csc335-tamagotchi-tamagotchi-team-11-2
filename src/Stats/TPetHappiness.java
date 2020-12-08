@@ -74,11 +74,25 @@ public class TPetHappiness extends TPetStat{
 		if (data < 100) {
 			data += amount;
 		}
+		if(data < 40) {
+			mood = MOOD.Sad;
+		} else if(data < 60) {
+			mood = MOOD.Normal;
+		} else {
+			mood = MOOD.Happy;
+		}
 	}
 	
 	public void decreaseMood(double amount) {
 		if (0 < data) {
 			data -= amount;
+		}
+		if(data < 40) {
+			mood = MOOD.Sad;
+		} else if(data < 60) {
+			mood = MOOD.Normal;
+		} else {
+			mood = MOOD.Happy;
 		}
 	}
 	

@@ -21,6 +21,7 @@ import Stats.TPetMoney;
 import Stats.TPetStat;
 import Stats.TPetWeight;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -45,10 +46,13 @@ import javafx.stage.Stage;
 
 public class TPetView extends Application implements Observer{
 	private BorderPane borderpane = new BorderPane();
+
 	private String filename = "save.txt";
+
 	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
 		TPetModel model = new TPetModel();
 		TPetController ctrl = new TPetController(model);
 		model.deleteObservers();

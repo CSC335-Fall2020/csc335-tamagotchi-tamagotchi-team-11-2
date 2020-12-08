@@ -7,8 +7,4 @@ public class LargeSnack extends Food{
 		super(FoodType.Snack, 6, 10, 20);
 	}
 
-	public LargeSnack(FoodType type, double hungryIncrease, double happinessIncrease) {
-		super(FoodType.Snack, 6, 10, 20);
-	}
-
 }
