@@ -52,4 +52,13 @@ public class TPetWeight extends TPetStat{
 	public double minimumWeight() {
 		return minimumWeight;
 	}
+	
+	public String getSize() {
+		if (data/idealWeight < 0.7) {
+			return "Thin";
+		} else if (dtat/idealWeight > 1.4) {
+			return "Fat";
+		}
+		return "";
+	}
 }
