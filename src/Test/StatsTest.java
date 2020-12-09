@@ -91,12 +91,14 @@ public class StatsTest {
 			hap.update();
 		}
 		hap.beSad();
-		hap.decreaseMood(100);
+		
 		for(int i = 0; i < 10; i++) {
+			hap.increaseMood(11);
 			hap.update();
 		}
-		hap.increaseMood(111);
+		
 		for(int i = 0; i < 10; i++) {
+			hap.decreaseMood(11);
 			hap.update();
 		}
 		hungry.set(100);

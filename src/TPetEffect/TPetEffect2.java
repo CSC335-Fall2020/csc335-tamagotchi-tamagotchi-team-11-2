@@ -7,6 +7,7 @@ import java.util.List;
 import TPet.TPetView;
 import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,6 +22,28 @@ import javafx.util.Duration;
 public class TPetEffect2 extends TPetEffect{
 
 	List<Group> elements = new ArrayList<>();
+	
+	public void addGroupToView(Group g) {
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				TPetView.getImagePane().getChildren().add(g);
+			}
+			
+		});
+	}
+	
+	public void removeGroupFromView(Group g) {
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				TPetView.getImagePane().getChildren().remove(g);
+			}
+			
+		});
+	}
 	
 	public TPetEffect2() {
 		for(int i = 0; i < 30; i++) {
@@ -38,7 +61,7 @@ public class TPetEffect2 extends TPetEffect{
 		Effect2Element e = new Effect2Element();
 		g.getChildren().add(e);
 		elements.add(g);
-		TPetView.getImagePane().getChildren().add(g);
+		addGroupToView(g);
 	}
 	
 	@Override
@@ -54,12 +77,12 @@ public class TPetEffect2 extends TPetEffect{
 			if(e.counter == e.lifeSpan) {
 				i.remove();
 				counter++;
-				TPetView.getImagePane().getChildren().remove(g);
+				removeGroupFromView(g);
 				continue;
 			}
 			if(e.getLayoutX() < 10 || e.getLayoutX() > TPetView.IMAGE_WIDTH * 2 ||
 					e.getLayoutY() < 10 || e.getLayoutY() > TPetView.IMAGE_HEIGHT * 2) {
-				TPetView.getImagePane().getChildren().remove(g);
+				removeGroupFromView(g);
 				i.remove();
 				counter++;
 				continue;

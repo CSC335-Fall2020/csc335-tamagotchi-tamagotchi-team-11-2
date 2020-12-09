@@ -6,6 +6,7 @@ import java.util.List;
 
 import TPet.TPetView;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -26,6 +27,28 @@ public class TPetEffect1 extends TPetEffect{
 		}
 	}
 	
+	public void addGroupToView(Group g) {
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				TPetView.getImagePane().getChildren().add(g);
+			}
+			
+		});
+	}
+	
+	public void removeGroupFromView(Group g) {
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				TPetView.getImagePane().getChildren().remove(g);
+			}
+			
+		});
+	}
+	
 	public void newParticle() {
 		Group g = new Group();
 		Circle circle = new Circle();
@@ -36,7 +59,8 @@ public class TPetEffect1 extends TPetEffect{
 		Effect1Element e = new Effect1Element();
 		g.getChildren().add(e);
 		elements.add(g);
-		TPetView.getImagePane().getChildren().add(g);
+		addGroupToView(g);
+		
 	}
 	
 	@Override
@@ -52,12 +76,12 @@ public class TPetEffect1 extends TPetEffect{
 			if(e.counter == e.lifeSpan) {
 				i.remove();
 				counter++;
-				TPetView.getImagePane().getChildren().remove(g);
+				removeGroupFromView(g);
 				continue;
 			}
 			if(e.getCenterX() < 10 || e.getLayoutX() > TPetView.IMAGE_WIDTH * 2 ||
 					e.getCenterY() < 10 || e.getLayoutY() > TPetView.IMAGE_HEIGHT * 2) {
-				TPetView.getImagePane().getChildren().remove(g);
+				removeGroupFromView(g);
 				i.remove();
 				counter++;
 				continue;
