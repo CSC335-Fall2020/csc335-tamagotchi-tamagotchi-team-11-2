@@ -412,16 +412,17 @@ public class TPetView extends Application implements Observer{
 		ImageView imageView = ((ImageView)((StackPane)borderpane.getCenter()).getChildren().get(0));
 		
 		if(imageView instanceof ImageView) {
-//			String path = "img/Happy.png";
+//			String path = "img/mood.png";
 			Image image = null;
 			try {
-				TPetHealth health = (TPetHealth)TPetController.getInstance().getStats()
-						.get(TPetModel.StatIndex.TPetHealth.ordinal());
-				if(health.getIsSick()) {
-					image = new Image(new FileInputStream("img/" + "death" + ".png"));
-				} else {
 				image = new Image(new FileInputStream("img/" + mood + ".png"));
+				filename = "img/";
+				if (sick.equals("true") {
+					filename += "sick";
+				} else {
+					filename += mood;
 				}
+			 	filename += ".png";
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
