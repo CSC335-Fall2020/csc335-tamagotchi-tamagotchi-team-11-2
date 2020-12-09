@@ -415,14 +415,18 @@ public class TPetView extends Application implements Observer{
 //			String path = "img/mood.png";
 			Image image = null;
 			try {
-				image = new Image(new FileInputStream("img/" + mood + ".png"));
-				filename = "img/";
-				if (sick.equals("true") {
-					filename += "sick";
+				String filename = "img/";
+				if (msg.get(5).equals("true") {
+					filename += "Sick";
 				} else {
 					filename += mood;
 				}
-			 	filename += ".png";
+				if (msg.get(6).equals("true")) {
+					filename += "Hungry";
+				} else {
+					filename += msg.get(7);
+				}
+			 	image = new Image(new FileInputStream("img/" + mood + ".png"));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
