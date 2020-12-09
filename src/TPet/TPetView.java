@@ -63,7 +63,7 @@ public class TPetView extends Application implements Observer{
 
 		//
 		//--------------------image display starts--------------------
-						String path = "img/normal.png";
+						String path = "img/NormalNormal.png";
 						Image image = new Image(new FileInputStream(path));
 						StackPane imagePane = new StackPane();
 						imagePane.setMaxHeight(IMAGE_HEIGHT);
@@ -389,7 +389,9 @@ public class TPetView extends Application implements Observer{
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		@SuppressWarnings("unchecked")
+		ArrayList<Object> args = (ArrayList<Object>) arg;
 		ArrayList<String> msg = (ArrayList<String>) arg;
+		
 		ObservableList<Node> children = ((HBox)borderpane.getTop()).getChildren();
 		System.out.println("in update");
 		
@@ -415,18 +417,22 @@ public class TPetView extends Application implements Observer{
 //			String path = "img/mood.png";
 			Image image = null;
 			try {
-				String filename = "img/";
-				if (msg.get(5).equals("true") {
+				String filename = "";
+				String fatness = msg.get(7);
+				if(fatness.equals("Fat") || fatness.equals("Thin")) {
+					filename += fatness;
+				} else {
+					filename += "Normal";
+				}
+				
+				if((boolean) args.get(5)) {
 					filename += "Sick";
+				} else if(msg.get(6).equals("true")){
+					filename = "NormalHungry";
 				} else {
 					filename += mood;
 				}
-				if (msg.get(6).equals("true")) {
-					filename += "Hungry";
-				} else {
-					filename += msg.get(7);
-				}
-			 	image = new Image(new FileInputStream("img/" + mood + ".png"));
+			 	image = new Image(new FileInputStream("img/" + filename + ".png"));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

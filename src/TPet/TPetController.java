@@ -19,6 +19,7 @@ import Stats.TPetHungriness;
 
 import Stats.TPetMoney;
 import Stats.TPetStat;
+import Stats.TPetWeight;
 import TPetEffect.TPetEffect;
 import javafx.scene.effect.Effect;
 
@@ -77,14 +78,22 @@ public class TPetController {
 			if(food.getType().equals(FoodType.Drug)) {
 				health.decreaseHealth(10); // Eating drug makes health decrease by 10
 			}
+			
 		
 //		happiness.set((int)(happiness.get() + food.getHappinessIncrease()));
 //		hungriness.set((int)(hungriness.get() + food.getHungryIncrease()));
-			if(hungriness.get() < 100 || happiness.get() < 100) {
-				happiness.increaseMood(food.getHappinessIncrease());
+			
+			if(hungriness.get() < 100) {
 				hungriness.increaseHungriness(food.getHungryIncrease());
-				money.spendMoney(food.getPrice());
 			}
+			if(happiness.get() < 100) {
+				happiness.increaseMood(food.getHappinessIncrease());
+			}
+			if(food.getType().equals(FoodType.Snack)) {
+				TPetWeight weight = (TPetWeight) getStats().get(TPetModel.StatIndex.TPetWeight.ordinal());
+				weight.set(weight.get() + food.getHungryIncrease() * 0.05);
+			}
+			money.spendMoney(food.getPrice());
 			return true;
 		}
 		return false;
