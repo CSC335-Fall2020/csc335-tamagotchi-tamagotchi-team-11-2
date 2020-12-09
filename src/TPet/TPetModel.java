@@ -127,7 +127,16 @@ public class TPetModel extends Observable{
 					} else {
 						sick = "false";
 					}
-					ArrayList<String> msg = new ArrayList<String>(Arrays.asList(healthPoints, moodStats, hungrinessPoints, weightPoints, moneyPoints, sick));
+					boolean hungryStats = ((TPetHungriness)stats.get(TPetModel.StatIndex.TPetHungriness.ordinal())).isHungry();
+					String hungry = null;
+					if (hungryStats) {
+						hungry = "true";
+					} else {
+						hungry = "false";
+					}
+					String Fatness = ((TPetWeight)stats.get(TPetModel.StatIndex.TPetWeight.ordinal())).getSize();
+							     
+					ArrayList<String> msg = new ArrayList<String>(Arrays.asList(healthPoints, moodStats, hungrinessPoints, weightPoints, moneyPoints, sick, hungry, Fatness));
 					setChanged();
 					notifyObservers(msg);
 				}
