@@ -63,7 +63,7 @@ public class TPetView extends Application implements Observer{
 
 		//
 		//--------------------image display starts--------------------
-						String path = "img/Normal.png";
+						String path = "img/normal.png";
 						Image image = new Image(new FileInputStream(path));
 						StackPane imagePane = new StackPane();
 						imagePane.setMaxHeight(IMAGE_HEIGHT);
