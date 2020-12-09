@@ -120,7 +120,14 @@ public class TPetModel extends Observable{
 					String hungrinessPoints = df.format(stats.get(TPetModel.StatIndex.TPetHungriness.ordinal()).get());
 					String weightPoints = df.format(stats.get(TPetModel.StatIndex.TPetWeight.ordinal()).get());
 					String moneyPoints = df.format(stats.get(TPetModel.StatIndex.TPetMoney.ordinal()).get());
-					ArrayList<String> msg = new ArrayList<String>(Arrays.asList(healthPoints, moodStats, hungrinessPoints, weightPoints, moneyPoints));
+					boolean sickStats = ((TPetHealth)stats.get(TPetModel.StatIndex.TPetHealth.ordinal()).getIsSick();
+				        String sick = null;
+					if (sickStats) {
+						sick = "true";
+					} else {
+						sick = "false";
+					}
+					ArrayList<String> msg = new ArrayList<String>(Arrays.asList(healthPoints, moodStats, hungrinessPoints, weightPoints, moneyPoints, sick));
 					setChanged();
 					notifyObservers(msg);
 				}
