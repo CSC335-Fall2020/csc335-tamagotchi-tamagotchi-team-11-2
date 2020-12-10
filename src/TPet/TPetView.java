@@ -59,6 +59,17 @@ public class TPetView extends Application implements Observer{
 
 	@SuppressWarnings("static-access")
 	@Override
+	/**
+     * Purpose: this method is going to make the window of the whole game and set the button 
+     * make every button have their own meaning and when people clicked it, just call the controller
+     * then change the static of the TPet.
+     *
+     * @param  primaryStage.
+     *
+     * @return None.
+     * 
+     * @throws None.
+     */
 	public void start(Stage primaryStage) throws Exception {
 
 		//
@@ -381,10 +392,29 @@ public class TPetView extends Application implements Observer{
 		
 	}
 	
+	/**
+     * Purpose: this method is going to return the stackpane which is the image.
+     *
+     * @param  None.
+     *
+     * @return borderpane.getCenter() will get the image.
+     * 
+     * @throws None.
+     */
 	public static StackPane getImagePane() {
 		return (StackPane) borderpane.getCenter();
 	}
-
+	
+	
+	/**
+     * Purpose: this method is going to update the data in the window
+     *
+     * @param  Observable o and arg is object.
+     *
+     * @return None.
+     * 
+     * @throws FileNotFoundException on read file.
+     */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub

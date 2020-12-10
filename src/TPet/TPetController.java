@@ -36,10 +36,24 @@ public class TPetController {
 	private TPetModel model;
 	public static TPetController _instance;
 	
+	/**
+     * Purpose: this is the constructor of the class.
+     *
+     * @param None.
+     *
+     * @return None.
+     */
 	public TPetController() {
 		this(new TPetModel());
 	}
 	
+	/**
+     * Purpose: this is the constructor of the class.
+     *
+     * @param  model is the TPetModel object.
+     *
+     * @return None.
+     */
 	public TPetController(TPetModel model) {
 		this.model = model;
 		_instance = this;
@@ -51,19 +65,47 @@ public class TPetController {
 		}
 	}
 	
+	/**
+     * Purpose: this method is going to get the instance of the class.
+     *
+     * @param  None.
+     *
+     * @return _instance is the instance of the controller.
+     */
 	public static TPetController getInstance() {
 		return _instance;
 	}
 	
+	/**
+     * Purpose: this method is going to get the static of the TPet model.
+     *
+     * @param  None.
+     *
+     * @return A list of the TPetStat.
+     */
 	public List<TPetStat> getStats(){
 		return model.getStats();
 	}
 	
-
+	/**
+     * Purpose: this method is going to return the TPet model.
+     *
+     * @param  None.
+     *
+     * @return the TPet model.
+     */
+	
 	public TPetModel getModel() {
 		return model;
 	}
 	
+	/**
+     * Purpose: this method is going to check if the money is enough for the food make the static change.
+     *
+     * @param  food is the Food object.
+     *
+     * @return true is the money is enough , false for the money is not enough.
+     */
 	public boolean feed(Food food) {
 		List<TPetStat> stats = TPetController.getInstance().getStats();
 		TPetMoney money = (TPetMoney)stats.get(TPetModel.StatIndex.TPetMoney.ordinal());
@@ -99,6 +141,14 @@ public class TPetController {
 		return false;
 	}
 	
+	
+	/**
+     * Purpose: this method is going to check if the TPet can make money and change the static of the Tpet.
+     *
+     * @param  None.
+     *
+     * @return true if the tpet can make money false if the tpet can not make the money.
+     */
 	public boolean makeMoney() {
 
 		List<TPetStat> stats = TPetController.getInstance().getStats();
@@ -118,6 +168,13 @@ public class TPetController {
 		
 	}
 	
+	/**
+     * Purpose: this method is going to check if the money is enough for the hospital.
+     *
+     * @param  None.
+     *
+     * @return true if the money is enough, false if the money is not enough.
+     */
 	public boolean goHospital() {
 		List<TPetStat> stats = TPetController.getInstance().getStats();
 		TPetMoney money = (TPetMoney)stats.get(TPetModel.StatIndex.TPetMoney.ordinal());
@@ -130,11 +187,27 @@ public class TPetController {
 		}
 		return false;
 	}
-	
+	/**
+     * Purpose: this method is going to save the game.
+     *
+     * @param  None.
+     *
+     * @return None.
+     */
 	public void autoSave() {
 		saveGame(SAVEFILE_NAME);
 	}
 	
+	
+	/**
+     * Purpose: this method is going to save the game in the given filename.
+     *
+     * @param  filename is the given filename.
+     *
+     * @return return true if the game can be saved , return false if the game can not be saved.
+     * 
+     * @throws IOException on read file.
+     */
 	public boolean saveGame(String filename) {
 		TPetSave save = new TPetSave();
 		try {
@@ -147,6 +220,16 @@ public class TPetController {
 			return false;
 		}
 	}
+	
+	/**
+     * Purpose: this method is going to load the game from the given file.
+     *
+     * @param  filename is the given filename.
+     *
+     * @return return true if the game can be loaded , return false if the game can not be loaded.
+     * 
+     * @throws IOException on read file and the ClassNotFoundException.
+     */
 	
 	public boolean loadGame(String filename) {
 		TPetSave save = null;

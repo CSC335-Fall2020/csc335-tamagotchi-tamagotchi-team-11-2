@@ -1,5 +1,6 @@
 package Stats;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import TPet.TPetController;
@@ -20,6 +21,16 @@ public class TPetHappiness extends TPetStat{
 
 	}
 	
+	
+	/**
+     * Purpose: this method is going to update the static of the mood.
+     *
+     * @param  None.
+     *
+     * @return None.
+     * 
+     * 
+     */
 	@Override
 	public void update() {
 		if(!shouldUpdate()) return;
@@ -62,14 +73,40 @@ public class TPetHappiness extends TPetStat{
 		//when hungriness below 50, go sad
 	}
 	
+	
+	/**
+     * Purpose: this method is going to return the mood of the Tpet.
+     *
+     * @param  None.
+     *
+     * @return the mood is the Mood object.
+     * 
+     */
 	public MOOD getMood() {
 		return mood;
 	}
 	
+	
+	/**
+     * Purpose: this method is going to set the mood of the Tpet to sad.
+     *
+     * @param  None.
+     *
+     * @return None.
+     * 
+     */
 	public void beSad() {
 		mood = MOOD.Sad;
 	}
 	
+	/**
+     * Purpose: this method is going to increase the mood.
+     *
+     * @param  the amount is the current mood double.
+     *
+     * @return None.
+     * 
+     */
 	public void increaseMood(double amount) {
 		if (data < 100) {
 			data += amount;
@@ -83,6 +120,15 @@ public class TPetHappiness extends TPetStat{
 		}
 	}
 	
+	
+	/**
+     * Purpose: this method is going to decrease the mood.
+     *
+     * @param  the amount is the current mood double.
+     *
+     * @return None.
+     * 
+     */
 	public void decreaseMood(double amount) {
 		if (0 < data) {
 			data -= amount;

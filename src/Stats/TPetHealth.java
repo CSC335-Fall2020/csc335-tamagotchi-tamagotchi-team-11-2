@@ -10,20 +10,59 @@ public class TPetHealth extends TPetStat {
 	private boolean isSick;
 	private int maxHealth = 100;
 	
+	
+	/**
+     * Purpose: this is the constructor of the health static.
+     *
+     * @param  None.
+     *
+     * @return None.
+     * 
+     * 
+     */
 	public TPetHealth() {
 		super();
 		data = maxHealth;
 		isSick = false;
 	}
 	
+	/**
+     * Purpose: this method is going to set the health number.
+     *
+     * @param  health is the integer represent the health static.
+     *
+     * @return None.
+     * 
+     * 
+     */
 	public void set(int health) {
 		this.data = health;
 	}
 	
+	
+	/**
+     * Purpose: this method is going to check if the TPet is sick or not.
+     *
+     * @param  None.
+     *
+     * @return return true if the TPet is sick, false for not sick.
+     * 
+     * 
+     */
 	public boolean getIsSick() {
 		return isSick;
 	}
 	
+	
+	/**
+     * Purpose: this method is going to update the static of the health.
+     *
+     * @param  None.
+     *
+     * @return None.
+     * 
+     * 
+     */
 	@Override
 	public void update() {
 		if(!shouldUpdate()) return;
@@ -64,14 +103,41 @@ public class TPetHealth extends TPetStat {
 		}
 	}
 	
+	/**
+     * Purpose: this method is going to set the static to sick.
+     *
+     * @param  None.
+     *
+     * @return None.
+     * 
+     * 
+     */
 	private void sick() {
 		isSick = true;
 	}
 	
+	/**
+     * Purpose: this method is going to set the static to not sick.
+     *
+     * @param  None.
+     *
+     * @return None.
+     * 
+     * 
+     */
 	private void cured() {
 		isSick = false;
 	}
 	
+	/**
+     * Purpose: this method is going to increase the health data.
+     *
+     * @param  None.
+     *
+     * @return None.
+     * 
+     * 
+     */
 	public void hospital() {
 		data += 40;
 		System.out.println("hospital");
@@ -81,6 +147,15 @@ public class TPetHealth extends TPetStat {
 		}
 	}
 	
+	/**
+     * Purpose: this method is going to decrease the health data.
+     *
+     * @param  amount is the health data.
+     *
+     * @return None.
+     * 
+     * 
+     */
 	public void decreaseHealth(int amount) {
 		data -= amount;
 		if(data < 0) {

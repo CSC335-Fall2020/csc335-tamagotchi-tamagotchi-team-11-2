@@ -12,6 +12,14 @@ public class TPetAge extends TPetStat {
 		super(0, 1);
 	}
 	
+	/**
+     * Purpose: this method is going to update the static of the age.
+     *
+     * @param  None.
+     *
+     * @return None.
+     * 
+     */
 	@Override
 	public void update() {
 		if(!shouldUpdate()) return;
@@ -22,7 +30,14 @@ public class TPetAge extends TPetStat {
 
 	}
 	
-
+	/**
+     * Purpose: this method is going to return the age.
+     *
+     * @param  None.
+     *
+     * @return age is a integer.
+     * 
+     */
 	public int getAge() {
 		return (int)data;
 
