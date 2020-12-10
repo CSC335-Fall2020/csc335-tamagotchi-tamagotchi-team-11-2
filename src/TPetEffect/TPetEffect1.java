@@ -17,38 +17,32 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+/**
+ * This is TPetEffect1.
+ * This class defines the action of effect1.
+ * 
+ * 
+ * @author zhengxuanxie
+ *
+ */
+
 public class TPetEffect1 extends TPetEffect{
 
 	List<Group> elements = new ArrayList<>();
-	
+	 
+	/**
+	 * Constructor
+	 */
 	public TPetEffect1() {
 		for(int i = 0; i < 30; i++) {
 			newParticle();
 		}
 	}
 	
-	public void addGroupToView(Group g) {
-		Platform.runLater(new Runnable() {
-
-			@Override
-			public void run() {
-				TPetView.getImagePane().getChildren().add(g);
-			}
-			
-		});
-	}
 	
-	public void removeGroupFromView(Group g) {
-		Platform.runLater(new Runnable() {
-
-			@Override
-			public void run() {
-				TPetView.getImagePane().getChildren().remove(g);
-			}
-			
-		});
-	}
-	
+	/**
+	 * This method generates a new Particle (The effect is constitute of many particles)
+	 */
 	public void newParticle() {
 		Group g = new Group();
 		Circle circle = new Circle();
@@ -63,6 +57,10 @@ public class TPetEffect1 extends TPetEffect{
 		
 	}
 	
+	/**
+	 * This method defines the main action of the particles. 
+	 * Should be triggered every tick.
+	 */
 	@Override
 	public synchronized void update() {
 		ImageView image = (ImageView)TPetView.getImagePane().getChildren().get(0);
@@ -104,17 +102,21 @@ public class TPetEffect1 extends TPetEffect{
 		}
 	}
 	
+	/**
+	 * This class initiates particle of effect1 with appropriate attributes.
+	 * @author zhengxuanxie
+	 *
+	 */
 	class Effect1Element extends Circle{
 		private int counter;
 		private int lifeSpan;
 		private double speed;
 		private double size;
 		
+		/**
+		 * Constructor of effect1element
+		 */
 		public Effect1Element() {
-			reset();
-		}
-		
-		public void reset() {
 			this.counter = 0;
 			do {
 				this.lifeSpan = 5 + (int) (100 * (Math.random()/2));

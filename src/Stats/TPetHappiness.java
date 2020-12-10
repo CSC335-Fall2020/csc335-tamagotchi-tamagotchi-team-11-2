@@ -6,6 +6,12 @@ import java.util.List;
 import TPet.TPetController;
 import TPet.TPetModel;
 
+/**
+ * This class defines behavior of happiness stat
+ * @author tamagotchi-team11
+ *
+ */
+
 public class TPetHappiness extends TPetStat{
 	private MOOD mood;
 	

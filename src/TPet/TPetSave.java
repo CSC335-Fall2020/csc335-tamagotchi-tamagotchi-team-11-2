@@ -6,6 +6,11 @@ import java.util.List;
 import Stats.TPetAge;
 import Stats.TPetStat;
 
+/**
+ * This class defines the constitution of a save.
+ * @author tamagotchi-team11
+ *
+ */
 public class TPetSave implements Serializable{
 	/**
 	 * 

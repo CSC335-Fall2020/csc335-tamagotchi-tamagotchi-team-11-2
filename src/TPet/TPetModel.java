@@ -148,6 +148,12 @@ public class TPetModel extends Observable{
 		//this.notifyObservers("abc");
 //		this.notifyObservers();
 	}
+	
+	/**
+	 * This class defines action of every tick 
+	 * @author tamagotchi-team11
+	 *
+	 */
 	private class UpdateTimer extends TimerTask{
 
 		@Override

@@ -48,6 +48,8 @@ import javafx.stage.Stage;
  * Team Project
  * Tamagotchi Pet
  * Team 11
+ * 
+ * This class is the main view of the game
  */
 
 public class TPetView extends Application implements Observer{

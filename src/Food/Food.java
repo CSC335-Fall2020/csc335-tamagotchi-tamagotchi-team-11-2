@@ -1,5 +1,10 @@
 package Food;
 
+/**
+ * This class defines behavior of Foods
+ * @author tamagotchi-team11
+ *
+ */
 public class Food {
 	public static enum FoodType{
 		Snack,

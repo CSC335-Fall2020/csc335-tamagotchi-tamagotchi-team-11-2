@@ -1,5 +1,10 @@
 package Stats;
 
+/**
+ * This class defines behavior of hungriness stat
+ * @author tamagotchi-team11
+ *
+ */
 public class TPetHungriness extends TPetStat {
 	
 	public TPetHungriness() {

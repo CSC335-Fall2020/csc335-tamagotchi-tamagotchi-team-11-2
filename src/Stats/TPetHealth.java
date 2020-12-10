@@ -5,7 +5,11 @@ import java.util.List;
 import TPet.TPetController;
 import TPet.TPetModel;
 
-
+/**
+ * This class defines behavior of health stat
+ * @author tamagotchi-team11
+ *
+ */
 public class TPetHealth extends TPetStat {
 	private boolean isSick;
 	private int maxHealth = 100;

@@ -1,5 +1,10 @@
 package Stats;
 
+/**
+ * This class defines behavior of money stat
+ * @author tamagotchi-team11
+ *
+ */
 public class TPetMoney extends TPetStat{
 	public TPetMoney() {
 		super(100, 1);

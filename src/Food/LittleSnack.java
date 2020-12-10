@@ -1,5 +1,11 @@
 package Food;
 
+/**
+ * This class defines type, hungriness increase, happinessIncrease and price 
+ * of little snack
+ * @author tamagotchi-team11
+ *
+ */
 public class LittleSnack extends Food{
 	
 	/**

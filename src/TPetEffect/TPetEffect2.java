@@ -19,38 +19,32 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+
+/**
+ * This is TPetEffect2.
+ * This class defines the action of effect2.
+ * 
+ * 
+ * @author zhengxuanxie
+ *
+ */
 public class TPetEffect2 extends TPetEffect{
 
 	List<Group> elements = new ArrayList<>();
 	
-	public void addGroupToView(Group g) {
-		Platform.runLater(new Runnable() {
 
-			@Override
-			public void run() {
-				TPetView.getImagePane().getChildren().add(g);
-			}
-			
-		});
-	}
-	
-	public void removeGroupFromView(Group g) {
-		Platform.runLater(new Runnable() {
-
-			@Override
-			public void run() {
-				TPetView.getImagePane().getChildren().remove(g);
-			}
-			
-		});
-	}
-	
+	/**
+	 * Constructor of TPetEffect2
+	 */
 	public TPetEffect2() {
 		for(int i = 0; i < 30; i++) {
 			newParticle();
 		}
 	}
 	
+	/**
+	 * This method generates a new Particle (The effect is constitute of many particles)
+	 */
 	public void newParticle() {
 		Group g = new Group();
 		Circle circle = new Circle();
@@ -64,6 +58,10 @@ public class TPetEffect2 extends TPetEffect{
 		addGroupToView(g);
 	}
 	
+	/**
+	 * This method defines the main action of the particles. 
+	 * Should be triggered every tick.
+	 */
 	@Override
 	public synchronized void update() {
 		ImageView image = (ImageView)TPetView.getImagePane().getChildren().get(0);
@@ -111,6 +109,11 @@ public class TPetEffect2 extends TPetEffect{
 		}
 	}
 	
+	/**
+	 * This class initiates particle of effect2 with appropriate attributes.
+	 * @author zhengxuanxie
+	 *
+	 */
 	class Effect2Element extends Rectangle{
 		private int counter;
 		private int lifeSpan;

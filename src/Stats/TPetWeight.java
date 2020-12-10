@@ -3,6 +3,12 @@ package Stats;
 import TPet.TPetController;
 import TPet.TPetModel;
 
+
+/**
+ * This class defines behavior of weight stat
+ * @author tamagotchi-team11
+ *
+ */
 public class TPetWeight extends TPetStat{
 	private double idealWeight;
 	private double minimumWeight;

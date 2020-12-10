@@ -1,5 +1,10 @@
 package Stats;
 
+/**
+ * This class defines behavior of stats
+ * @author tamagotchi-team11
+ *
+ */
 public class TPetStat {
 	protected double data;
 	protected int tickPerUpdate; //How many ticks needed for an update;

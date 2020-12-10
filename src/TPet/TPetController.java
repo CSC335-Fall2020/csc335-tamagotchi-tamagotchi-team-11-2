@@ -257,6 +257,12 @@ public class TPetController {
 		return true;
 	}
 	 
+	/**
+	 * This method triggers effect. If a effect is already triggered, return false.
+	 * 
+	 * @param (Class of effect) c
+	 * @return (boolean) successful
+	 */
 	public boolean triggerEffect(Class<? extends TPetEffect> c) {
 		TPetMoney money = (TPetMoney)getStats().get(TPetModel.StatIndex.TPetMoney.ordinal());
 		// If money < 1000, return false

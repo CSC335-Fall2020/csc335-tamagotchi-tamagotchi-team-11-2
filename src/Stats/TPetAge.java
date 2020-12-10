@@ -4,6 +4,11 @@ import java.util.List;
 
 import TPet.TPetModel;
 
+/**
+ * This class defines behavior of age stat
+ * @author tamagotchi-team11
+ *
+ */
 public class TPetAge extends TPetStat {
 	
 
