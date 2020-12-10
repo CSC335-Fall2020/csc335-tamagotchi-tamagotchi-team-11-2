@@ -2,7 +2,14 @@ package Food;
 
 public class Drug extends Food{
 
-	
+	/**
+     * Purpose: this is the constructor of the Drug.
+     *
+     * @param  None.
+     *
+     * @return None.
+     * 
+     */
 	public Drug() {
 		super(FoodType.Drug, 1, 40, 100);
 	}
