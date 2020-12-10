@@ -43,6 +43,13 @@ public class TPetModel extends Observable{
 		TPetMoney;
 	}
 	
+	/**
+     * Purpose: this method is the constructor of the model class.
+     *
+     * @param  None.
+     *
+     * @return None.
+     */
 	public TPetModel() {
 		stats = new ArrayList<TPetStat>();
 		stats.add(new TPetAge());
@@ -61,19 +68,47 @@ public class TPetModel extends Observable{
 //		System.out.println("b");
 		
 	}
-	
+	/**
+     * Purpose: this method is going to add the effect.
+     *
+     * @param  effect is the TPetEffect object.
+     *
+     * @return None.
+     */
 	public void addEffect(TPetEffect effect) {
 		this.effects.add(effect);
 	}
 	
+	
+	/**
+     * Purpose: this method is going to return the effect.
+     *
+     * @param  None.
+     *
+     * @return effects is the list of TPetEffect object.
+     */
 	public List<TPetEffect> getEffects(){
 		return effects;
 	}
 	
+	
+	/**
+     * Purpose: this method is going cancel time.
+     *
+     * @param  None.
+     *
+     * @return None.
+     */
 	public void cancelTimer() {
 		timer.cancel();
 	}
-	
+	/**
+     * Purpose: this method is going to update the saving time by every 30 seconds.
+     *
+     * @param  None.
+     *
+     * @return None.
+     */
 	public void update() {
 		for(TPetStat s : stats) {
 			s.update();
@@ -87,9 +122,25 @@ public class TPetModel extends Observable{
 		}
 	}
 	
+	
+	/**
+     * Purpose: this method is going to return the list of static of Tpet.
+     *
+     * @param  None.
+     *
+     * @return stats is the list of TPetStat object in it.
+     */
 	public List<TPetStat> getStats(){
 		return stats;
 	}
+	
+	/**
+     * Purpose: this method is going to refresh.
+     *
+     * @param  None.
+     *
+     * @return None.
+     */
 	public void refresh() {
 		System.out.println("in refresh");
 		System.out.println(this.countObservers());
@@ -146,3 +197,4 @@ public class TPetModel extends Observable{
 	
 	}
 }
+
